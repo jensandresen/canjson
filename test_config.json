@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "routes": {
+        "sites": {
+            "get": {
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "statusCode": 200,
+                "body": {
+                    "message": "hello world!"
+                }
+            }
+        }
+    }
+}

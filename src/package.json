@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "mocha --recursive ./tests/*.js",
+    "test:watch": "mocha --recursive --watch ./tests/*.js",
+    "mocha": "mocha --help"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  }
 }
