@@ -7,6 +7,7 @@
     "start": "node index.js",
     "test": "mocha --recursive ./tests/*.js",
     "test:watch": "mocha --recursive --watch ./tests/*.js",
+    "test:run": "node index.js -c ./../test_config.json",
     "mocha": "mocha --help"
   },
   "keywords": [],
@@ -14,5 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "mocha": "^6.2.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
   }
 }

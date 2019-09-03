@@ -1,15 +1,18 @@
 const http = require("http");
 const Engine = require("./engine");
+const settingsLoader = require("./settings-loader");
 
-const config = require("./../test_config.json");
-const engine = new Engine(config)
+const settings = settingsLoader();
 
 const server = http.createServer((req, res) => {
+    const config = settings.loadConfig();
+    const engine = new Engine(config)
+
     console.log(`Incomming request: ${req.method.toUpperCase()} => ${req.url}`);
     engine.handle(req, res);
 });
 
-const port = process.env.PORT || 5005;
+const port = settings.port;
 
 server.listen(port, () => {
     console.log('Welcome to...');

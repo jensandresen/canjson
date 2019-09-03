@@ -123,10 +123,8 @@ describe("engine", function () {
 
         sut.handle(reqStub, resSpy);
 
-        assert.equal(
-            JSON.stringify(actualHeaders), 
-            JSON.stringify({ "X-Powered-By": "canjson" })
-        );
+        const result = actualHeaders["X-Powered-By"];
+        assert.equal(result, "canjson");
     });
 
     it("adds expected headers from config to response", function() {
@@ -157,12 +155,111 @@ describe("engine", function () {
 
         sut.handle(reqStub, resSpy);
 
+        const result = {};
+        for (let k in expectedHeaders) {
+            result[k] = actualHeaders[k];
+        }
+
         assert.equal(
-            JSON.stringify(actualHeaders), 
-            JSON.stringify({...sut.defaultHeaders, ...expectedHeaders})
+            JSON.stringify(result),
+            JSON.stringify(expectedHeaders)
         );
     });
 
+    it("adds content type application/json header to response when no headers are predefined", function() {
+        let actualHeaders = {};
+        
+        const resSpy = responseBuilder({ writeHead: (statusCode, headers) => actualHeaders = headers });
+        const reqStub = requestBuilder({ method: "get", url: "foo" });
+
+        const dummyBody = "dummy";
+        const dummyStatusCode = 200;
+
+        const sut = sutBuilder({
+            routes: {
+                foo: {
+                    get: {
+                        body: dummyBody,
+                        statusCode: dummyStatusCode
+                    }
+                }
+            }
+        });
+
+        sut.handle(reqStub, resSpy);
+
+        const result = actualHeaders["Content-Type"];
+
+        assert.equal(
+            result, 
+            "application/json"
+        );
+    });
+
+    it("does NOT add content type application/json header to response if already defined", function() {
+        let actualHeaders = {};
+        
+        const resSpy = responseBuilder({ writeHead: (statusCode, headers) => actualHeaders = headers });
+        const reqStub = requestBuilder({ method: "get", url: "foo" });
+
+        const dummyBody = "dummy";
+        const dummyStatusCode = 200;
+
+        const sut = sutBuilder({
+            routes: {
+                foo: {
+                    get: {
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: dummyBody,
+                        statusCode: dummyStatusCode
+                    }
+                }
+            }
+        });
+
+        sut.handle(reqStub, resSpy);
+
+        const contentTypeHeaders = Object.keys(actualHeaders)
+            .map(x => x.toUpperCase())
+            .filter(x => x == "CONTENT-TYPE");
+
+        assert.equal(contentTypeHeaders.length, 1);
+    });
+
+    it("does NOT add content type application/json header to response if already defined with different casing", function() {
+        let actualHeaders = {};
+        
+        const resSpy = responseBuilder({ writeHead: (statusCode, headers) => actualHeaders = headers });
+        const reqStub = requestBuilder({ method: "get", url: "foo" });
+
+        const dummyBody = "dummy";
+        const dummyStatusCode = 200;
+
+        const sut = sutBuilder({
+            routes: {
+                foo: {
+                    get: {
+                        headers: {
+                            "content-type": "lala",
+                            "foo": "lala",
+                        },
+                        body: dummyBody,
+                        statusCode: dummyStatusCode
+                    }
+                }
+            }
+        });
+
+        sut.handle(reqStub, resSpy);
+
+        const contentTypeHeaders = Object.keys(actualHeaders)
+            .map(x => x.toUpperCase())
+            .filter(x => x == "CONTENT-TYPE");
+
+        assert.equal(contentTypeHeaders.length, 1);
+    });
 
 });
 
