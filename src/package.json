@@ -1,7 +1,7 @@
 {
   "name": "canjson",
   "version": "1.0.0",
-  "description": "",
+  "description": "Create a server that serves canned json answers defined in a single configuration file.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,9 +10,12 @@
     "test:run": "node index.js -c ./../test_config.json",
     "mocha": "mocha --help"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["fake", "stub", "json", "canned", "canned answer", "server"],
+  "author": "Jens Andresen <jensandresen@gmail.com>",
+  "repository": {
+    "url": "https://github.com/jensandresen/canjson",
+  },
+  "license": "MIT",
   "devDependencies": {
     "mocha": "^6.2.0"
   },
