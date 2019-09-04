@@ -4,8 +4,9 @@
   "description": "Create a server that serves canned json answers defined in a single configuration file.",
   "main": "index.js",
   "files": [
-    "./*.js"
+    "*.js"
   ],
+  "bin": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "mocha --recursive ./tests/*.js",

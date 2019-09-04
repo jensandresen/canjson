@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const http = require("http");
 const Engine = require("./engine");
 const settingsLoader = require("./settings-loader");
