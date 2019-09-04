@@ -1,3 +1,5 @@
+IMAGE_NAME=canjson
+
 init: restore
 
 restore:
@@ -8,3 +10,6 @@ test:
 
 run:
 	@ cd src && npm run test:run
+
+container:
+	@ docker build -t $(IMAGE_NAME) .
