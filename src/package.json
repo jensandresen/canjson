@@ -1,6 +1,6 @@
 {
   "name": "canjson",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Create a server that serves canned json answers defined in a single configuration file.",
   "main": "index.js",
   "files": [

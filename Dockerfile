@@ -1,6 +1,6 @@
 FROM node:alpine
 
 WORKDIR /data
-RUN npm install -g canjson@1.0.0
+RUN npm install -g canjson@1.1.0
 
 ENTRYPOINT [ "canjson" ]
