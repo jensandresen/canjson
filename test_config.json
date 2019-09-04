@@ -1,7 +1,7 @@
 {
     "version": 1,
     "routes": {
-        "sites": {
+        "hello": {
             "get": {
                 "headers": {
                     "content-type": "application/json"
