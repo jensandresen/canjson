@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Create a server that serves canned json answers defined in a single configuration file.",
   "main": "index.js",
+  "files": [
+    "./*.js"
+  ],
   "scripts": {
     "start": "node index.js",
     "test": "mocha --recursive ./tests/*.js",
@@ -14,6 +17,7 @@
   "author": "Jens Andresen <jensandresen@gmail.com>",
   "repository": {
     "url": "https://github.com/jensandresen/canjson",
+    "type": "git"
   },
   "license": "MIT",
   "devDependencies": {
