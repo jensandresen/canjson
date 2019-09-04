@@ -7,4 +7,4 @@ test:
 	@ cd src && npm run test:watch
 
 run:
-	@ cd src && npm run start
+	@ cd src && npm run test:run
