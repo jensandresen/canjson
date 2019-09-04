@@ -7,11 +7,21 @@ const settingsLoader = require("./settings-loader");
 const settings = settingsLoader();
 
 const server = http.createServer((req, res) => {
-    const config = settings.loadConfig();
-    const engine = new Engine(config)
-
     console.log(`Incomming request: ${req.method.toUpperCase()} => ${req.url}`);
-    engine.handle(req, res);
+
+    try {
+        const config = settings.loadConfig();
+        const engine = new Engine(config)
+
+        engine.handle(req, res);
+    } catch(err) {
+        const message = err.toString();
+        console.log("ERROR!: " + message);
+
+        res.writeHead(500, {"Content-Type": "text/plain"});
+        res.write(message);
+        res.end();
+    }
 });
 
 const port = settings.port;
